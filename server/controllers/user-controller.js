@@ -6,6 +6,7 @@ require("dotenv").config({ path: "../../env" });
 const ERROR_CONNECTING = "Error conneting to the server!"
 const ERROR_SENDING_EMAIL = "Error sending mail to the given mail!"
 const ERROR_INVALID_EMAIL = "Invalid email address!"
+const ERROR_INVALID_CREDENTIALS = "Invalid credentials!"
 
 exports.signup = function (req, res, next) {
     let email = req.body.email;
@@ -29,12 +30,26 @@ exports.signin = function (req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
 
-    let _query = "SELECT * from user where username = ?";
-    dbConfig.query(_query, [username], (err, rows) => {
+    let _query = "SELECT * from user where username = ? and password=?";
+    dbConfig.query(_query, [username, password], (err, rows) => {
         if (err) {
             console.log(ERROR_CONNECTING)
             console.log(err);
             return res.status(500).send({ success: false, message: ERROR_CONNECTING })
+        } else {
+            try{
+                if(rows!=null){
+                    if(password==rows[0]['password']){
+                        return res.status(200).send({succes:true, message: "Login successful!"})
+                    }
+                }else{
+                    console.log(ERROR_INVALID_CREDENTIALS);
+                    return res.status(401).send({success: false, message: ERROR_INVALID_CREDENTIALS})
+                }
+            }catch(e){
+                console.log(e);
+                return res.status(401).send({success: false, message: ERROR_INVALID_CREDENTIALS})
+            }
         }
     });
 };
