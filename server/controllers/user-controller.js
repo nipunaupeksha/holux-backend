@@ -69,7 +69,7 @@ exports.signin = function (req, res, next) {
             try {
                 if (rows[0] != null) {
                     if (password === rows[0]['password']) {
-                        return res.status(200).send({ success: true, message: "Login successful!" })
+                        return res.status(200).send({ success: true,  message: "Login successful!", type:rows[0]['type']})
                     } else {
                         console.log(ERROR_INVALID_CREDENTIALS);
                         return res.status(401).send({ success: false, message: ERROR_INVALID_CREDENTIALS })
