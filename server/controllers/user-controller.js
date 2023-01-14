@@ -40,11 +40,10 @@ exports.signup = function (req, res, next) {
                             let _query_2 = "INSERT INTO user(username, fullname, email, password, type) VALUES (?,?,?,?,?)";
                             dbConfig.query(_query_2, [username, fullname, email, password, usertype], (err, rows) => {
                                 if (err) {
-                                    console.log(err)
                                     console.log(ERROR_CONNECTING);
-                                    return res.status(500).send({ success: false, message: ERROR_CONNECTING })
+                                    return res.status(500).send({ success: false, message: ERROR_CONNECTING });
                                 } else {
-                                    return res.status(201).send({ success: true, data: { email: email, password: password, username: username, message: "Account successfully created!" } })
+                                    return res.status(201).send({ success: true, data: { email: email, password: password, username: username, message: "Account successfully created!" }});
                                 }
                             });
                         }
