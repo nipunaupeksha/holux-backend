@@ -5,6 +5,7 @@ const cors =  require("cors");
 const users = require("./server/routes/user-routes");
 const orders = require("./server/routes/order-routes");
 const outlets = require("./server/routes/outlet-router");
+const items = require("./server/routes/item-routes");
 
 require("dotenv").config();
 
@@ -20,6 +21,7 @@ app.use(cors({
 app.use("/users", users);
 app.use("/orders", orders);
 app.use("/outlets", outlets);
+app.use("/items", items);
 
 app.listen(port, ()=>{
     console.log(`Holux backend is listening at http://localhost:${port}`);
