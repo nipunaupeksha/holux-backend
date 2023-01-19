@@ -10,8 +10,8 @@ exports.createItem = function(req, res, next){
     let itemname = req.body.itemname;
     let itemprice = req.body.itemprice;
 
-    let _query_1 = "SELECT * FROM item WHERE itemcode=?"
-    let _query_2 = "INSERT INTO item(itemcode, itemname, itemprice) VALUES (?,?,?)"
+    let _query_1 = "SELECT * FROM item WHERE itemcode=?";
+    let _query_2 = "INSERT INTO item(itemcode, itemname, itemprice) VALUES (?,?,?)";
     dbConfig.query(_query_1, [itemcode], (err, rows)=>{
         if(err){
             console.log(ERROR_CONNECTING)
@@ -29,6 +29,23 @@ exports.createItem = function(req, res, next){
                         }
                     })
                 }
+            }
+        }
+    })
+}
+
+// get all items
+exports.getAllItems = function(req, res, next){
+    let _query = "SELECT * FROM item";
+
+    dbConfig.query(_query, (err, rows)=>{
+        if(err){
+            return res.status(500).send({success: false, message: ERROR_CONNECTING})
+        } else{
+            if(rows[0]!=null){
+                return res.status(200).send({success: true, data: rows})
+            } else{
+                return res.status(200).send({success: true, data: []})
             }
         }
     })
