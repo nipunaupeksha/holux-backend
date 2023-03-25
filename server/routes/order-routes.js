@@ -1,11 +1,11 @@
-const express = require("express");
-const router = express.Router();
-const orderController = require("../controllers/order-controller");
+const express = require('express')
+const router = express.Router()
+const orderController = require('../controllers/order-controller')
 
-router.post("/create-order", orderController.createOrder);
-router.post("/get-daily-orders", orderController.getDailyOrders);
-router.post("/get-outlet-orders", orderController.getOutletOrders);
-router.post("/get-outlet-daily-orders", orderController.getOutletDailyOrders);
-router.get("/get-annual-sales",orderController.getAnnualSales);
+router.post('/create-order', orderController.createOrder)
+router.post('/get-daily-orders', orderController.getDailyOrders)
+router.post('/get-outlet-orders', orderController.getOutletOrders)
+router.post('/get-outlet-daily-orders', orderController.getOutletDailyOrders)
+router.get('/get-annual-sales', orderController.getAnnualSales)
 
-module.exports = router;
+module.exports = router
