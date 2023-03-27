@@ -246,13 +246,13 @@ exports.changeProfile = function (req, res, next) {
   let mobile = req.body.mobile
   let address = req.body.address
   let password = req.body.password
-  let profile_pic = req.body.profile_pic
+  let profilePic = req.body.profilePic
 
   let _query =
     'UPDATE user SET fullname = ?, mobile = ?, address = ?, password = ?, profile_pic = ? WHERE email = ?'
   dbConfig.query(
     _query,
-    [fullname, mobile, address, password, profile_pic, email],
+    [fullname, mobile, address, password, profilePic, email],
     (err, rows) => {
       if (err) {
         console.log(ERROR_CONNECTING)
@@ -268,7 +268,7 @@ exports.changeProfile = function (req, res, next) {
             mobile: mobile,
             address: address,
             password: password,
-            profile_pic: profile_pic
+            profilePic: profilePic
           }
         })
       }
